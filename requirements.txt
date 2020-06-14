@@ -60,3 +60,8 @@ webencodings==0.5.1
 Werkzeug==1.0.1
 zipp==3.1.0
 whitenoise==5.1.0
+pandas== 1.0.4
+requests== 2.23.0
+smartystreets_python_sdk==4.5.0
+
+
