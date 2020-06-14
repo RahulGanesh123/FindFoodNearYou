@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Food Banks</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Food Banks</h1>
+    {% if foodbanks|length < 1 %}
+    <h4 style="text-align: center">Add Food Banks Below!</h4>
+    {% else %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Donation Link</th>
+            <th>Zipcode</th>
+            <th>Date Added</th>
+        </tr>
+        {% for foodbank in foodbanks %}
+            <tr>
+                <td>{{ foodbank.name }}</td>
+                <td>{{ foodbank.address }} </td>
+                <td> <a href="{{ foodbank.donation_link }}">Link</a></td>
+                <td> {{ foodbank.zipcode }}</td>
+                <td>{{ foodbank.date_created.date() }}</td>
+                
+                
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <div class="form">
+        <form action="/" method="POST">
+            <label for="name">Food Bank name:</label>
+            <input type="text" id="name" name="name"><br><br>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address"><br><br>
+            <label for="donation_link">Donation Link:</label>
+            <input type="text" id="donation_link" name="donation_link"><br><br>
+            <label for="zipcode">Zipcode: </label>
+            <input type="text" id="zipcode" name="zipcode"><br><br>
+            <input type="submit" onclick="formSubmit()" value="Add Food Bank">
+
+        </form>
+    </div>
+    <div class="form">
+        <form action="/query_by_zip" method="GET">
+            <br><br>
+            <label for="zipcode">Find your closest food bank by entering zipcode: </label>
+            <input type="text" id="zipcode" name="zipcode"><br><br>
+            <input type="submit" onclick="formSubmit()" value="search">
+
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a href="https://foodbankcovidcrisis.herokuapp.com/" class="btn btn-primary btn-xl rounded-pill mt-5">Back!</a>
+</div>
+{% endblock %}
